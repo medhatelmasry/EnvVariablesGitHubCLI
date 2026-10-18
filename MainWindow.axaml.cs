@@ -34,10 +34,11 @@ public partial class MainWindow : Window
         var current = EnvStore.Get(variable);
         if (!string.IsNullOrEmpty(current) && !items.Any(o => o.Value == current))
             items.Add(new EnvStore.Option(current, current));
+        if (!items.Any(o => o.Value == "")) items.Insert(0, new EnvStore.Option("", ""));
         box.ItemsSource = items;
-        if (!string.IsNullOrEmpty(current)) box.SelectedItem = items.First(o => o.Value == current);
-        else if (EnvStore.HasApplied && items.Any(o => o.Value == "")) box.SelectedItem = items.First(o => o.Value == "");
-        else box.SelectedItem = items.LastOrDefault();
+        box.SelectedItem = !string.IsNullOrEmpty(current)
+            ? items.First(o => o.Value == current)
+            : items.First(o => o.Value == "");
     }
 
     private static string ValueOf(ComboBox box) => (box.SelectedItem as EnvStore.Option)?.Value ?? "";
