@@ -2,3 +2,5 @@
 OpenAI,https://api.openai.com/v1
 Anthropic,https://api.anthropic.com
 Ollama,http://localhost:11434/v1
+Foundry,http://localhost:56347/v1
+Docker Desktop,http://localhost:12434/engines/v1
