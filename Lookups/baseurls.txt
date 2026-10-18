@@ -1,0 +1,4 @@
+ , 
+OpenAI,https://api.openai.com/v1
+Anthropic,https://api.anthropic.com
+Ollama,http://localhost:11434/v1

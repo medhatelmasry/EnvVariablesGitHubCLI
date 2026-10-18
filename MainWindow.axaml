@@ -1,0 +1,31 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="CopilotEnvSwitcher.MainWindow"
+        Title="Copilot Environment Variables"
+        Width="560" Height="520" CanResize="False"
+        WindowStartupLocation="CenterScreen">
+  <StackPanel Margin="24" Spacing="6">
+    <TextBlock Text="COPILOT_PROVIDER_BASE_URL" FontWeight="SemiBold"/>
+    <ComboBox x:Name="BaseUrlBox" HorizontalAlignment="Stretch"/>
+
+    <TextBlock Text="COPILOT_MODEL" FontWeight="SemiBold" Margin="0,8,0,0"/>
+    <ComboBox x:Name="ModelBox" HorizontalAlignment="Stretch"/>
+
+    <TextBlock Text="COPILOT_PROVIDER_TYPE" FontWeight="SemiBold" Margin="0,8,0,0"/>
+    <CheckBox x:Name="UseProvider" Content="Set this variable (optional)" IsCheckedChanged="Optional_Changed"/>
+    <ComboBox x:Name="ProviderBox" HorizontalAlignment="Stretch"/>
+
+    <TextBlock Text="COPILOT_PROVIDER_API_KEY" FontWeight="SemiBold" Margin="0,8,0,0"/>
+    <StackPanel Orientation="Horizontal" Spacing="24">
+      <CheckBox x:Name="UseApiKey" Content="Set this variable (optional)" IsCheckedChanged="Optional_Changed"/>
+      <CheckBox x:Name="ShowKey" Content="Show API key" IsCheckedChanged="ShowKey_Changed"/>
+    </StackPanel>
+    <TextBox x:Name="ApiKeyBox" PasswordChar="●" HorizontalAlignment="Stretch"/>
+
+    <StackPanel Orientation="Horizontal" Spacing="8" Margin="0,12,0,0" HorizontalAlignment="Right">
+      <Button Content="Clear All" Click="ClearAll_Click" Padding="24,6"/>
+      <Button Content="Apply" Click="Apply_Click" Classes="accent" Padding="24,6"/>
+    </StackPanel>
+    <TextBlock x:Name="StatusText" TextWrapping="Wrap" Margin="0,6,0,0"/>
+  </StackPanel>
+</Window>

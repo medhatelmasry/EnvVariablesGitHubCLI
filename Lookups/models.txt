@@ -1,0 +1,5 @@
+
+qwen2.5-coder:7b
+qwen3:8b
+llama3.1:8b
+
