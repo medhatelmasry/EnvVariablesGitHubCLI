@@ -12,12 +12,31 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         Load(BaseUrlBox, EnvStore.BaseUrl, "baseurls.txt");
-        Load(ModelBox, EnvStore.Model, "models.txt");
         Load(ProviderBox, EnvStore.ProviderType, "providers.txt");
+        // models.txt lines are "Engine,Model"; Text is the engine name matching a base URL entry.
+        _allModels = EnvStore.ReadOptions("models.txt");
+        RefreshModels(EnvStore.Get(EnvStore.Model));
+        BaseUrlBox.SelectionChanged += (_, _) => RefreshModels(ValueOf(ModelBox));
         ApiKeyBox.Text = EnvStore.Get(EnvStore.ApiKey) ?? "";
         UseProvider.IsChecked = !string.IsNullOrEmpty(EnvStore.Get(EnvStore.ProviderType));
         UseApiKey.IsChecked = !string.IsNullOrEmpty(ApiKeyBox.Text);
         Optional_Changed(null, null!);
+    }
+
+    private List<EnvStore.Option> _allModels = new();
+
+    // Shows only the models listed for the selected engine (base URL), plus a blank option.
+    private void RefreshModels(string? preferred, bool keepUnlisted = true)
+    {
+        var engine = (BaseUrlBox.SelectedItem as EnvStore.Option)?.Text ?? "";
+        var items = new List<EnvStore.Option> { new("", "") };
+        items.AddRange(_allModels
+            .Where(m => m.Value != "" && engine != "" && m.Text.Equals(engine, StringComparison.OrdinalIgnoreCase))
+            .Select(m => new EnvStore.Option(m.Value, m.Value)));
+        if (keepUnlisted && !string.IsNullOrEmpty(preferred) && !items.Any(o => o.Value == preferred))
+            items.Add(new EnvStore.Option(preferred, preferred));
+        ModelBox.ItemsSource = items;
+        ModelBox.SelectedItem = items.FirstOrDefault(o => o.Value == (preferred ?? "")) ?? items[0];
     }
 
     private void Optional_Changed(object? sender, RoutedEventArgs e)

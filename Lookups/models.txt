@@ -1,5 +1,12 @@
 
-qwen2.5-coder:7b
-qwen3:8b
-llama3.1:8b
-
+Ollama, qwen2.5-coder:7b
+Ollama, qwen3:8b
+Ollama, llama3.1:8b
+Docker Desktop, ai/smollm2:360M-Q4_K_M
+Docker Desktop, ai/qwen3:4b-instruct-2507-q4_K_M
+Foundry Local, ai/qwen2.5-0.5b-instruct-vitis-npu:3
+Foundry Local, qwen2.5-0.5b-instruct-generic-gpu:4
+Foundry Local, ai/qwen2.5-0.5b-instruct-generic-cpu:4
+OpenAI, gpt-4o-mini
+OpenAI, gpt-4.1-mini
+Anthropic, claude-haiku-4-5
